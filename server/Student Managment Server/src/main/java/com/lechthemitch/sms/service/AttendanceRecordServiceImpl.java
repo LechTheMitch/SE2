@@ -7,6 +7,7 @@ import com.lechthemitch.sms.dao.StudentRepository;
 import com.lechthemitch.sms.dto.AttendanceRecordDTO;
 import com.lechthemitch.sms.dto.AttendanceRecordResponseDTO;
 import com.lechthemitch.sms.dto.AttendanceScanRequestDTO;
+import com.lechthemitch.sms.dto.notification.AttendanceNotificationRequest;
 import com.lechthemitch.sms.entity.AttendanceRecord;
 import com.lechthemitch.sms.entity.Hall;
 import com.lechthemitch.sms.entity.Session;
@@ -24,6 +25,7 @@ public class AttendanceRecordServiceImpl implements AttendanceRecordService {
     private final StudentRepository studentRepository;
     private final SessionRepository sessionRepository;
     private final HallRepository hallRepository;
+    private final NotificationClient notificationClient;
 
     @Override
     public AttendanceRecordResponseDTO create(AttendanceRecordDTO dto) {
@@ -53,7 +55,19 @@ public class AttendanceRecordServiceImpl implements AttendanceRecordService {
         attendanceRecord.setHall(hall);
         attendanceRecord.setAttendanceDate(dto.attendanceDate() != null ? dto.attendanceDate() : OffsetDateTime.now());
 
-        return toResponse(attendanceRecordRepository.save(attendanceRecord));
+        AttendanceRecord savedRecord = attendanceRecordRepository.save(attendanceRecord);
+
+        // Send notification
+        AttendanceNotificationRequest notificationRequest = AttendanceNotificationRequest.builder()
+                .studentName(student.getUser().getFirstName() + " " + student.getUser().getLastName())
+                .parentEmail(student.getParent().getUser().getEmail())
+                .parentPhoneNumber(student.getParentPhoneNumber())
+                .sessionName(session.getTitle())
+                .attendanceTime(savedRecord.getAttendanceDate())
+                .build();
+        notificationClient.sendAttendanceNotification(notificationRequest);
+
+        return toResponse(savedRecord);
     }
 
     @Override

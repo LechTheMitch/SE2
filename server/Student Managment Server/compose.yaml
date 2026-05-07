@@ -7,7 +7,7 @@ services:
       - 'MYSQL_ROOT_PASSWORD=verysecret'
       - 'MYSQL_USER=myuser'
     ports:
-      - '8081:3306'
+      - '8082:3306'
     healthcheck:
       test: [ "CMD-SHELL", "mysqladmin ping -h localhost -p$${MYSQL_ROOT_PASSWORD} --silent" ]
       interval: 5s
@@ -20,15 +20,26 @@ services:
     depends_on:
       mysql:
         condition: service_healthy
+      notification-service:
+        condition: service_started
     environment:
       SPRING_DATASOURCE_URL: "jdbc:mysql://mysql:3306/SE2?useSSL=false&allowPublicKeyRetrieval=true"
       SPRING_DATASOURCE_USERNAME: "myuser"
       SPRING_DATASOURCE_PASSWORD: "secret"
-      SPRING_JPA_HIBERNATE_DDL_AUTO: "create"
+      SPRING_JPA_HIBERNATE_DDL_AUTO: "update"
+      NOTIFICATION_SERVICE_URL: "http://notification-service:8081"
     ports:
       - '8080:8080'
     volumes:
       - file_uploads:/app/uploads
+    restart: on-failure
+
+  notification-service:
+    build: ../notification-service
+    environment:
+      SERVER_PORT: "8081"
+    ports:
+      - '8081:8081'
     restart: on-failure
 
 volumes:
