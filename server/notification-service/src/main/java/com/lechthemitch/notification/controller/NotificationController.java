@@ -2,14 +2,14 @@ package com.lechthemitch.notification.controller;
 
 import com.lechthemitch.notification.dto.AttendanceNotificationRequest;
 import com.lechthemitch.notification.service.NotificationService;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.mvc.method.annotation.SseEmitter;
 
 @RestController
 @RequestMapping("/api/notifications")
+@CrossOrigin(origins = "*") // In production, restrict this to your frontend URL
 public class NotificationController {
 
     private final NotificationService notificationService;
@@ -22,5 +22,10 @@ public class NotificationController {
     public ResponseEntity<Void> notifyAttendance(@RequestBody AttendanceNotificationRequest request) {
         notificationService.sendAttendanceNotification(request);
         return ResponseEntity.ok().build();
+    }
+
+    @GetMapping(value = "/subscribe/{email}", produces = MediaType.TEXT_EVENT_STREAM_VALUE)
+    public SseEmitter subscribe(@PathVariable String email) {
+        return notificationService.subscribe(email);
     }
 }

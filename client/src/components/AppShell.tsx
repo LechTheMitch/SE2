@@ -27,6 +27,7 @@ import FactCheckIcon from '@mui/icons-material/FactCheck';
 import ManageAccountsIcon from '@mui/icons-material/ManageAccounts';
 import { useAuth } from '../context/useAuth';
 import type { Role } from '../lib/types';
+import { NotificationListener } from './NotificationListener';
 
 const navItems = [
   { label: 'Dashboard', path: '/', icon: <DashboardIcon /> },
@@ -77,6 +78,7 @@ export function AppShell({ children }: { children?: ReactNode }) {
 
   return (
     <Box sx={{ display: 'flex', minHeight: '100vh', bgcolor: 'background.default' }}>
+      <NotificationListener />
       <AppBar
         position="fixed"
         color="inherit"
