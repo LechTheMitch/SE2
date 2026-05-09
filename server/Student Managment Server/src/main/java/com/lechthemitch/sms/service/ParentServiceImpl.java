@@ -9,6 +9,7 @@ import com.lechthemitch.sms.dto.StudentResponseDTO;
 import com.lechthemitch.sms.entity.Parent;
 import com.lechthemitch.sms.entity.Student;
 import com.lechthemitch.sms.entity.User;
+import jakarta.transaction.Transactional;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -52,6 +53,7 @@ public class ParentServiceImpl implements ParentService {
     }
 
     @Override
+    @Transactional
     public ParentResponseDTO update(Integer id, ParentDTO dto) {
         Parent parent = getParent(id);
         if (parent.getUser().getId() != dto.userId()) {
@@ -62,6 +64,7 @@ public class ParentServiceImpl implements ParentService {
     }
 
     @Override
+    @Transactional
     public void deleteById(Integer id) {
         Parent parent = getParent(id);
         List<Student> children = studentRepository.findByParentId(id);

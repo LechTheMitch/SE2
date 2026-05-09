@@ -11,9 +11,10 @@ import {
   Typography
 } from '@mui/material';
 import { FormEvent, useState } from 'react';
-import { Navigate, useLocation, useNavigate } from 'react-router';
+import { Navigate, useLocation, useNavigate, Link } from 'react-router';
 import { useAuth } from '../context/useAuth';
 import { getApiErrorMessage } from '../lib/api';
+import { Link as MuiLink } from '@mui/material';
 
 export function LoginPage() {
   const { login, token } = useAuth();
@@ -75,6 +76,13 @@ export function LoginPage() {
           <Button type="submit" variant="contained" size="large" disabled={submitting}>
             {submitting ? 'Signing in...' : 'Login'}
           </Button>
+
+          <Typography variant="body2" textAlign="center" color="text.secondary">
+            Don't have an account?{' '}
+            <MuiLink component={Link} to="/register" sx={{ fontWeight: 700, textDecoration: 'none' }}>
+              Sign Up
+            </MuiLink>
+          </Typography>
         </Stack>
       </Paper>
     </Box>

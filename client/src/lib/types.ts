@@ -4,6 +4,15 @@ export interface AuthResponse {
   token: string;
 }
 
+export interface RegisterRequest {
+  firstName: string;
+  lastName?: string;
+  email: string;
+  password?: string;
+  phoneNumber: string;
+  role: Role;
+}
+
 export interface CurrentUser {
   userId: number;
   firstName: string;

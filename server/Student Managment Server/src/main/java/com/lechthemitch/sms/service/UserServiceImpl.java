@@ -35,12 +35,14 @@ public class UserServiceImpl implements UserService, UserDetailsService {
     }
 
     @Override
+    @Transactional
     public User save(User user) {
         user.setPassword(passwordEncoder.encode(user.getPassword()));
         return userRepository.save(user);
     }
 
     @Override
+    @Transactional
     public void deleteById(int theId) {
         userRepository.deleteById(theId);
     }

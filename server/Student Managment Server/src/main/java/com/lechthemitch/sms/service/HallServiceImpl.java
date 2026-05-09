@@ -6,6 +6,7 @@ import com.lechthemitch.sms.dto.HallDTO;
 import com.lechthemitch.sms.dto.HallResponseDTO;
 import com.lechthemitch.sms.entity.Hall;
 import com.lechthemitch.sms.entity.Session;
+import jakarta.transaction.Transactional;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -37,6 +38,7 @@ public class HallServiceImpl implements HallService {
     }
 
     @Override
+    @Transactional
     public HallResponseDTO update(Integer id, HallDTO dto) {
         Hall hall = getHall(id);
         applyDto(hall, dto);
@@ -44,6 +46,7 @@ public class HallServiceImpl implements HallService {
     }
 
     @Override
+    @Transactional
     public void deleteById(Integer id) {
         if (!hallRepository.existsById(id)) {
             throw new IllegalArgumentException("Hall not found: " + id);

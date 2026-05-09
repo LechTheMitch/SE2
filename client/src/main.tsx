@@ -14,6 +14,7 @@ import { AttendanceScreen } from './pages/AttendanceScreen';
 import { Dashboard } from './pages/Dashboard';
 import { HallsPage } from './pages/HallsPage';
 import { LoginPage } from './pages/LoginPage';
+import { RegisterPage } from './pages/RegisterPage';
 import { SessionsPage } from './pages/SessionsPage';
 import { StudentDetail } from './pages/StudentDetail';
 import { StudentsPage } from './pages/StudentsPage';
@@ -67,6 +68,7 @@ createRoot(document.getElementById('root')!).render(
         <AuthProvider>
           <Routes>
             <Route path="/login" element={<LoginPage />} />
+            <Route path="/register" element={<RegisterPage />} />
             <Route element={<ProtectedRoute />}>
               <Route element={<AppShell />}>
                 <Route index element={<Dashboard />} />

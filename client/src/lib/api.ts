@@ -4,6 +4,7 @@ import type {
   AttendanceRecord,
   AttendanceScanRequest,
   AuthResponse,
+  RegisterRequest,
   CreateHallRequest,
   CreateSessionRequest,
   CurrentUser,
@@ -93,6 +94,10 @@ export const authApi = {
   async me(): Promise<CurrentUser> {
     const { data } = await apiClient.get<CurrentUser>('/api/users/me');
     return data;
+  },
+  async register(data: RegisterRequest): Promise<AuthResponse> {
+    const { data: response } = await apiClient.post<AuthResponse>('/register', data);
+    return response;
   }
 };
 

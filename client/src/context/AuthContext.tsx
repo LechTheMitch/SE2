@@ -2,7 +2,7 @@ import { jwtDecode } from 'jwt-decode';
 import { ReactNode, useCallback, useEffect, useMemo, useState } from 'react';
 import { authApi, setAuthToken, setUnauthorizedHandler } from '../lib/api';
 import { clearStoredToken, readStoredToken, writeStoredToken } from '../lib/authStorage';
-import type { CurrentUser, Role } from '../lib/types';
+import type { CurrentUser, RegisterRequest, Role } from '../lib/types';
 import { AuthContext } from './authContextValue';
 
 interface JwtPayload {
@@ -69,14 +69,23 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     setUser(profile);
   }, []);
 
+  const register = useCallback(async (data: RegisterRequest) => {
+    const response = await authApi.register(data);
+    setAuthToken(response.token);
+    clearStoredToken(); // Don't persist on register by default, or could make it optional
+    const profile = await authApi.me();
+    setToken(response.token);
+    setUser(profile);
+  }, []);
+
   const hasRole = useCallback(
     (roles?: Role[]) => !roles?.length || (!!user?.role && roles.includes(user.role)),
     [user]
   );
 
   const value = useMemo(
-    () => ({ token, user, loading, login, logout, hasRole }),
-    [token, user, loading, login, logout, hasRole]
+    () => ({ token, user, loading, login, register, logout, hasRole }),
+    [token, user, loading, login, register, logout, hasRole]
   );
 
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;

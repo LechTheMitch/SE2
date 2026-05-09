@@ -6,6 +6,7 @@ import com.lechthemitch.sms.dto.SessionDTO;
 import com.lechthemitch.sms.dto.SessionResponseDTO;
 import com.lechthemitch.sms.entity.Hall;
 import com.lechthemitch.sms.entity.Session;
+import jakarta.transaction.Transactional;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -40,6 +41,7 @@ public class SessionServiceImpl implements SessionService {
         return toResponse(getSession(id));
     }
 
+    @Transactional
     @Override
     public SessionResponseDTO update(Integer id, SessionDTO dto) {
         Session session = getSession(id);
@@ -49,6 +51,7 @@ public class SessionServiceImpl implements SessionService {
     }
 
     @Override
+    @Transactional
     public void deleteById(Integer id) {
         if (!sessionRepository.existsById(id)) {
             throw new IllegalArgumentException("Session not found: " + id);

@@ -12,6 +12,7 @@ import com.lechthemitch.sms.entity.Role;
 import com.lechthemitch.sms.entity.RoleType;
 import com.lechthemitch.sms.entity.Student;
 import com.lechthemitch.sms.entity.User;
+import jakarta.transaction.Transactional;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -65,6 +66,7 @@ public class StudentServiceImpl implements StudentService {
     }
 
     @Override
+    @Transactional
     public StudentResponseDTO update(Integer id, StudentDTO dto) {
         Student student = getStudent(id);
         if (student.getUser().getId() != dto.userId()) {
@@ -75,6 +77,7 @@ public class StudentServiceImpl implements StudentService {
     }
 
     @Override
+    @Transactional
     public void deleteById(Integer id) {
         Student student = getStudent(id);
         if (!attendanceRecordRepository.findByStudentId(id).isEmpty()) {
