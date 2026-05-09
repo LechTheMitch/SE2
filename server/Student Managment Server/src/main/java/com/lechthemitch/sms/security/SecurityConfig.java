@@ -62,7 +62,7 @@ public class SecurityConfig {
         return source;
     }
 
-    @Bean//TODO Understand what is that
+    @Bean
     public AuthenticationProvider authenticationProvider(UserDetailsService userDetailsService,
                                                          PasswordEncoder passwordEncoder) {
         DaoAuthenticationProvider provider = new DaoAuthenticationProvider(userDetailsService);

@@ -1,4 +1,4 @@
-package com.lechthemitch.sms.rest;
+package com.lechthemitch.sms.aspect;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

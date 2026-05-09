@@ -15,29 +15,56 @@ services:
       retries: 20
       start_period: 20s
 
+  discovery-server:
+    build:
+      context: ../discovery-server
+    ports:
+      - '8761:8761'
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8761/eureka/"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  api-gateway:
+    build:
+      context: ../api-gateway
+    ports:
+      - '8080:8080'
+    depends_on:
+      discovery-server:
+        condition: service_healthy
+    environment:
+      EUREKA_CLIENT_SERVICEURL_DEFAULTZONE: "http://discovery-server:8761/eureka/"
+
   app:
     build: .
     depends_on:
       mysql:
         condition: service_healthy
-      notification-service:
-        condition: service_started
+      discovery-server:
+        condition: service_healthy
     environment:
       SPRING_DATASOURCE_URL: "jdbc:mysql://mysql:3306/SE2?useSSL=false&allowPublicKeyRetrieval=true"
       SPRING_DATASOURCE_USERNAME: "myuser"
       SPRING_DATASOURCE_PASSWORD: "secret"
       SPRING_JPA_HIBERNATE_DDL_AUTO: "update"
-      NOTIFICATION_SERVICE_URL: "http://notification-service:8081"
+      EUREKA_CLIENT_SERVICEURL_DEFAULTZONE: "http://discovery-server:8761/eureka/"
+      SERVER_PORT: "8083"
     ports:
-      - '8080:8080'
+      - '8083:8083'
     volumes:
       - file_uploads:/app/uploads
     restart: on-failure
 
   notification-service:
     build: ../notification-service
+    depends_on:
+      discovery-server:
+        condition: service_healthy
     environment:
       SERVER_PORT: "8081"
+      EUREKA_CLIENT_SERVICEURL_DEFAULTZONE: "http://discovery-server:8761/eureka/"
     ports:
       - '8081:8081'
     restart: on-failure

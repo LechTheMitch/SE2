@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="f610f220-651c-46d7-a02c-fe16f7eb1c94" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/../../client/.env.example" beforeDir="false" afterPath="$PROJECT_DIR$/../../client/.env.example" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Student Managment Server/Dockerfile" beforeDir="false" afterPath="$PROJECT_DIR$/../Student Managment Server/Dockerfile" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Student Managment Server/compose.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/../Student Managment Server/compose.yaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Student Managment Server/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../Student Managment Server/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Student Managment Server/src/main/java/com/lechthemitch/sms/StudentManagmentServerApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Student Managment Server/src/main/java/com/lechthemitch/sms/StudentManagmentServerApplication.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Student Managment Server/src/main/java/com/lechthemitch/sms/rest/GlobalExceptionHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Student Managment Server/src/main/java/com/lechthemitch/sms/aspect/GlobalExceptionHandler.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Student Managment Server/src/main/java/com/lechthemitch/sms/security/SecurityConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Student Managment Server/src/main/java/com/lechthemitch/sms/security/SecurityConfig.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Student Managment Server/src/main/java/com/lechthemitch/sms/service/NotificationClient.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Student Managment Server/src/main/java/com/lechthemitch/sms/service/NotificationClient.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Student Managment Server/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/../Student Managment Server/src/main/resources/application.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../notification-service/Dockerfile" beforeDir="false" afterPath="$PROJECT_DIR$/../notification-service/Dockerfile" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../notification-service/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../notification-service/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../notification-service/src/main/java/com/lechthemitch/notification/NotificationServiceApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/../notification-service/src/main/java/com/lechthemitch/notification/NotificationServiceApplication.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../notification-service/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/../notification-service/src/main/resources/application.properties" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="CopilotPersistence">
+    <persistenceIdMap>
+      <entry key="_/Users/gamal/Projects/Software-Engineering-2/server/api-gateway" value="3DU2wuDFUlcfeocNSRWUMfD8psV" />
+    </persistenceIdMap>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/../.." />
+  </component>
+  <component name="MavenImportPreferences">
+    <option name="generalSettings">
+      <MavenGeneralSettings>
+        <option name="mavenHomeTypeForPersistence" value="WRAPPER" />
+      </MavenGeneralSettings>
+    </option>
+  </component>
+  <component name="ProjectColorInfo"><![CDATA[{
+  "associatedIndex": 1
+}]]></component>
+  <component name="ProjectId" id="3DU2wuDFUlcfeocNSRWUMfD8psV" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "ModuleVcsDetector.initialDetectionPerformed": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.git.unshallow": "true",
+    "Spring Boot.ApiGatewayApplication.executor": "Run",
+    "git-widget-placeholder": "main",
+    "kotlin-language-version-configured": "true",
+    "last_opened_file_path": "/Users/gamal/Projects/Software-Engineering-2/server/api-gateway",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "settings.editor.selected.configurable": "advanced.settings",
+    "vue.rearranger.settings.migration": "true"
+  }
+}]]></component>
+  <component name="RunManager">
+    <configuration name="ApiGatewayApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" nameIsGenerated="true">
+      <module name="api-gateway" />
+      <option name="SPRING_BOOT_MAIN_CLASS" value="com.lechthemitch.gateway.ApiGatewayApplication" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+  </component>
+  <component name="SharedIndexes">
+    <attachedChunks>
+      <set>
+        <option value="bundled-jdk-9823dce3aa75-bf35d07a577b-intellij.indexing.shared.core-IU-252.23892.409" />
+        <option value="bundled-js-predefined-d6986cc7102b-e03c56caf84a-JavaScript-IU-252.23892.409" />
+      </set>
+    </attachedChunks>
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="f610f220-651c-46d7-a02c-fe16f7eb1c94" name="Changes" comment="" />
+      <created>1778322569730</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1778322569730</updated>
+      <workItem from="1778322570772" duration="5259000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="github-copilot-workspace">
+    <instructionFileLocations>
+      <option value=".github/instructions" />
+    </instructionFileLocations>
+    <promptFileLocations>
+      <option value=".github/prompts" />
+    </promptFileLocations>
+  </component>
+</project>
