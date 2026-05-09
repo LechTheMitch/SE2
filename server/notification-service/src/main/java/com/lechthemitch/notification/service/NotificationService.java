@@ -18,20 +18,32 @@ public class NotificationService {
     private final Map<String, SseEmitter> emitters = new ConcurrentHashMap<>();
 
     public SseEmitter subscribe(String email) {
+        if (email == null) return null;
+        String normalizedEmail = email.trim().toLowerCase();
         SseEmitter emitter = new SseEmitter(Long.MAX_VALUE);
         
-        emitter.onCompletion(() -> emitters.remove(email));
-        emitter.onTimeout(() -> emitters.remove(email));
-        emitter.onError((e) -> emitters.remove(email));
+        emitter.onCompletion(() -> {
+            log.info("SSE connection completed for: {}", normalizedEmail);
+            emitters.remove(normalizedEmail);
+        });
+        emitter.onTimeout(() -> {
+            log.info("SSE connection timed out for: {}", normalizedEmail);
+            emitters.remove(normalizedEmail);
+        });
+        emitter.onError((e) -> {
+            log.error("SSE connection error for: {}: {}", normalizedEmail, e.getMessage());
+            emitters.remove(normalizedEmail);
+        });
         
-        emitters.put(email, emitter);
-        log.info("User subscribed for real-time notifications: {}", email);
+        emitters.put(normalizedEmail, emitter);
+        log.info("User subscribed for real-time notifications: {}", normalizedEmail);
         
         // Send initial connection event
         try {
             emitter.send(SseEmitter.event().name("INIT").data("Connected"));
         } catch (IOException e) {
-            emitters.remove(email);
+            log.error("Failed to send INIT event to: {}", normalizedEmail);
+            emitters.remove(normalizedEmail);
         }
         
         return emitter;
@@ -40,7 +52,13 @@ public class NotificationService {
     public void sendAttendanceNotification(AttendanceNotificationRequest request) {
         log.info("Processing attendance notification for student: {}", request.getStudentName());
         
-        String parentEmail = request.getParentEmail();
+        String rawParentEmail = request.getParentEmail();
+        if (rawParentEmail == null) {
+            log.warn("Notification request has null parent email");
+            return;
+        }
+        
+        String parentEmail = rawParentEmail.trim().toLowerCase();
         SseEmitter emitter = emitters.get(parentEmail);
         
         if (emitter != null) {
@@ -54,7 +72,10 @@ public class NotificationService {
                 emitters.remove(parentEmail);
             }
         } else {
-            log.info("No active UI connection for parent: {}. Skipping real-time push.", parentEmail);
+            log.info("No active UI connection for parent: {}. Skipping real-time push. (Total active: {})", 
+                    parentEmail, emitters.size());
+            // Log known keys for debugging
+            log.debug("Active connections: {}", emitters.keySet());
         }
         
         // Legacy logging

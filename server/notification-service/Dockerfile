@@ -4,7 +4,7 @@ RUN dnf install -y tar gzip && dnf clean all
 WORKDIR /workspace
 COPY mvnw pom.xml ./
 COPY .mvn .mvn
-RUN chmod +x mvnw && ./mvnw -B -DskipTests dependency:go-offline
+RUN chmod +x mvnw && sed -i 's/\r$//' mvnw && ./mvnw -B -DskipTests dependency:go-offline
 COPY src ./src
 RUN ./mvnw -B -DskipTests package
 RUN mkdir -p /app && cp target/*.jar /app/app.jar

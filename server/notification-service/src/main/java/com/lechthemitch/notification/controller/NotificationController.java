@@ -9,7 +9,6 @@ import org.springframework.web.servlet.mvc.method.annotation.SseEmitter;
 
 @RestController
 @RequestMapping("/api/notifications")
-@CrossOrigin(origins = "*") // In production, restrict this to your frontend URL
 public class NotificationController {
 
     private final NotificationService notificationService;
